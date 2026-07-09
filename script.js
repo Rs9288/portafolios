@@ -41,3 +41,142 @@ document.querySelectorAll(
     observer.observe(card);
 
 });
+//==============================
+// MENU
+//==============================
+
+const menu=document.querySelector(".menu-toggle");
+
+const links=document.querySelector(".nav-links");
+
+menu.addEventListener("click",()=>{
+
+links.classList.toggle("active");
+
+});
+
+//==============================
+// BACK TO TOP
+//==============================
+
+const back=document.getElementById("backTop");
+
+window.addEventListener("scroll",()=>{
+
+if(window.scrollY>400){
+
+back.classList.add("show");
+
+}else{
+
+back.classList.remove("show");
+
+}
+
+});
+
+back.onclick=()=>{
+
+window.scrollTo({
+
+top:0,
+
+behavior:"smooth"
+
+});
+
+};
+
+//==============================
+// HERO TYPING
+//==============================
+
+const typing=document.getElementById("typing");
+
+const texts=[
+
+"Discord Developer",
+
+"Web Developer",
+
+"Minecraft Developer",
+
+"UI Designer"
+
+];
+
+let txt=0;
+
+let char=0;
+
+let deleting=false;
+
+function type(){
+
+const current=texts[txt];
+
+if(!deleting){
+
+typing.textContent=current.substring(0,char++);
+
+if(char>current.length){
+
+deleting=true;
+
+setTimeout(type,1500);
+
+return;
+
+}
+
+}else{
+
+typing.textContent=current.substring(0,char--);
+
+if(char===0){
+
+deleting=false;
+
+txt=(txt+1)%texts.length;
+
+}
+
+}
+
+setTimeout(type,deleting?45:90);
+
+}
+
+type();
+
+//==============================
+// COUNTERS
+//==============================
+
+document.querySelectorAll(".hero-stats h3").forEach(counter=>{
+
+const target=counter.innerText;
+
+if(target.includes("+")){
+
+const value=parseInt(target);
+
+let i=0;
+
+const interval=setInterval(()=>{
+
+i++;
+
+counter.innerText=i+"+";
+
+if(i>=value){
+
+clearInterval(interval);
+
+}
+
+},50);
+
+}
+
+});
